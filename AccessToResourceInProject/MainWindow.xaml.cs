@@ -55,13 +55,21 @@ namespace AccessToResourceInProject
                             //二つ目の方法
                             foreach (DictionaryEntry resource in rr)
                             {
-                                if ((string) resource.Key == resourceName)
+                                if ((string)resource.Key == resourceName)
                                 {
-                                    using (var sr = new StreamReader((Stream) resource.Value))
+                                    using (var sr = new StreamReader((Stream)resource.Value))
                                     {
                                         fileContent = sr.ReadToEnd();
                                     }
                                 }
+                            }
+
+
+                            //@Zuishinさんに教えていただいた方法
+                            var info = Application.GetResourceStream(new Uri("/TextFiles/TextFile1.txt", UriKind.Relative));
+                            using (var sr = new StreamReader(info.Stream))
+                            {
+                                fileContent = sr.ReadToEnd();
                             }
                         }
                     }
